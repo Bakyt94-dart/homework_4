@@ -15,8 +15,17 @@ class RpgGame {
     Medic doc = Medic('Tom', 250, 5, 15);
     Medic assistant = Medic('Strange', 300, 5, 5);
     Berserk berserk = Berserk('Guts', 260, 10);
+    Ludoman ludoman = Ludoman("Jack", 250, 0);
 
-    List<Hero> heroes = [warrior1, assistant, warrior2, magic, doc, berserk];
+    List<Hero> heroes = [
+      warrior1,
+      assistant,
+      warrior2,
+      magic,
+      doc,
+      berserk,
+      ludoman,
+    ];
 
     _showStatistics(boss, heroes);
 
@@ -67,4 +76,28 @@ class RpgGame {
       print(hero);
     }
   }
+}
+
+class Boss {
+  Boss(String s, int i, int j);
+
+  String? get defence => null;
+
+  int? get health => null;
+
+  bool isAlive() {
+    return true;
+  }
+
+  void attack(List<Hero> heroes) {}
+
+  void chooseDefence() {}
+}
+
+class Ludoman extends Hero {
+  Ludoman(String name, int health, int manaOrStamina)
+    : super(name, health, manaOrStamina, SuperAbility.gamble);
+
+  @override
+  void applySuperPower(Boss boss, List<Hero> heroes) {}
 }

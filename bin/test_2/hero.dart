@@ -6,21 +6,34 @@ import 'rpg_game.dart';
 abstract class Hero extends GameCharacter {
   SuperAbility ability;
 
-  Hero(super.name, super.health, super.damage, this.ability);
+  Hero(String name, int health, int damage, this.ability)
+    : super(name, health, damage);
+
+  int get health => this.health;
+
+  num get damage => this.damage;
 
   void attack(Boss boss) {
     boss.health -= damage;
   }
 
+  bool isAlive() {
+    return health > 0;
+  }
+
   void applySuperPower(Boss boss, List<Hero> heroes);
 }
+
+class GameCharacter {}
 
 class Warrior extends Hero {
   Warrior(String name, int health, int damage)
     : super(name, health, damage, SuperAbility.criticalDamage);
 
+  get damage => null;
+
   void applySuperPower(Boss boss, List<Hero> heroes) {
-    int crit = (RpgGame.random.nextInt(5) + 2) * damage; // 2,3,4,5,6
+    int crit = ((RpgGame.random.nextInt(5) + 2) * damage!).toInt(); // 2,3,4,5,6
     boss.health -= crit;
     print('Warrior $name hits critically $crit');
   }
